@@ -3,7 +3,7 @@ import styled from 'styled-components';
 import { IndexLink } from 'react-router';
 import { pxToRem } from '../../../../../../theme';
 
-const H1 = styled.h1`
+export const H1 = styled.h1`
   color: white;
   font-family: Karla;
   font-size: ${pxToRem(30)};
@@ -13,7 +13,7 @@ const H1 = styled.h1`
   text-shadow: 0 ${pxToRem(2)} ${pxToRem(3)} rgba(0,0,0,0.5);
 `;
 
-const StyledLink = styled(IndexLink).attrs({
+export const StyledLink = styled(IndexLink).attrs({
   activeClassName: 'active'
 })`
   text-decoration: none;
@@ -34,6 +34,11 @@ function ProjectTitle({ link, title }) {
     </H1>
   );
 }
+
+ProjectTitle.defaultProps = {
+  link: '',
+  title: ''
+};
 
 ProjectTitle.propTypes = {
   link: PropTypes.string,
