@@ -213,7 +213,7 @@ class TaskNav extends React.Component {
             </Link>}
           {completed &&
             <button
-              autoFocus={true}
+              autoFocus={this.props.autoFocus}
               className="continue major-button"
               onClick={this.props.nextSubject}
             >
@@ -232,6 +232,7 @@ TaskNav.propTypes = {
     shortcut: PropTypes.object,
     value: PropTypes.any
   }),
+  autoFocus: PropTypes.bool,
   children: PropTypes.node,
   classification: PropTypes.shape({
     annotations: PropTypes.array,
@@ -263,6 +264,7 @@ TaskNav.propTypes = {
 };
 
 TaskNav.defaultProps = {
+  autoFocus: true,
   disabled: false
 };
 
