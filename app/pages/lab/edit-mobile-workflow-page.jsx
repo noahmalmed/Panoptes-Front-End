@@ -48,10 +48,6 @@ export default class EditMobileWorkflowPage extends React.Component {
     }
   }
 
-  handleTutorialToggle() {
-    console.log('TOGGLE');
-  }
-
   removeTutorial() {
     this.setState({ showTutorials: false });
     const currentTutorial = this.state.workflowTutorials[0];
