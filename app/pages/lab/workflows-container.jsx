@@ -9,6 +9,7 @@ export default class WorkflowsContainer extends React.Component {
       loading: true,
       reorder: false,
       workflowCreationInProgress: false,
+      createMobileWorkflow: false,
       workflows: []
     };
     this.handleSetStatsCompletenessType = this.handleSetStatsCompletenessType.bind(this);
@@ -86,12 +87,12 @@ export default class WorkflowsContainer extends React.Component {
     return `/lab/${this.props.project.id}${postFix}`;
   }
 
-  showCreateWorkflow() {
-    this.setState({ workflowCreationInProgress: true });
+  showCreateWorkflow(mobile = false) {
+    this.setState({ workflowCreationInProgress: true, createMobileWorkflow: mobile });
   }
 
   hideCreateWorkflow() {
-    this.setState({ workflowCreationInProgress: false });
+    this.setState({ workflowCreationInProgress: false, createMobileWorkflow: false });
   }
 
   handleWorkflowReorder(newOrder) {
