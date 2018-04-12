@@ -4,6 +4,7 @@ counterpart = require 'counterpart'
 
 WorkflowCreateForm = createReactClass
   getDefaultProps: ->
+    mobile: false
     onCancel: ->
     onSubmit: ->
     onSuccess: ->
@@ -33,6 +34,20 @@ WorkflowCreateForm = createReactClass
       retirement: workflowToClone?.retirement ? {}
       active: @props.workflowActiveStatus ? false
 
+    if @props.mobile
+      newWorkflow.mobile_friendly = true
+      newWorkflow.tasks = {
+        T0: {
+          help: "",
+          type: "single",
+          answers: [ {label: "Yes"}, {label: "No"} ],
+          question: "Question placeholder",
+          required: false,
+          enableHidePrevMarks: false
+        }
+      }
+
+
     awaitSubmission = @props.onSubmit(@props.projectID, newWorkflow)
 
     Promise.resolve(awaitSubmission)
@@ -45,7 +60,7 @@ WorkflowCreateForm = createReactClass
   render: ->
     <form onSubmit={@handleSubmit} style={maxWidth: '90vw', width: '30ch'}>
       <label>
-        <span className="form-label">New Workflow Title</span>
+        <span className="form-label">{"New #{if @props.mobile then "Mobile" else ""} Workflow Title"}</span>
         <br />
         <input className="standard-input full" type="text" ref="newDisplayName" defaultValue="new workflow title" autoFocus required />
       </label>

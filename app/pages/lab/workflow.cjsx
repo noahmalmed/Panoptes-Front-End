@@ -19,6 +19,7 @@ classnames = require 'classnames'
 ShortcutEditor = require('../../classifier/tasks/shortcut/editor').default
 FeedbackSection = require('../../features/feedback/lab').default
 MobileSection = require('./mobile').default
+EditMobileWorkflowPage = require('./edit-mobile-workflow-page').default
 
 DEMO_SUBJECT_SET_ID = if process.env.NODE_ENV is 'production'
   '6' # Cats
@@ -708,7 +709,7 @@ EditWorkflowPage = createReactClass
       if @props.workflow.id is @props.project.configuration?.default_workflow
         @props.project.update 'configuration.default_workflow': undefined
         @props.project.save()
-
+      console.log "At A", @props.workflow
       @props.workflow.delete().then =>
         @props.project.uncacheLink 'workflows'
         @context.router.push "/lab/#{@props.project.id}"
@@ -742,8 +743,12 @@ module.exports = createReactClass
       workflowID: ''
 
   render: ->
+
     <PromiseRenderer promise={apiClient.type('workflows').get @props.params.workflowID, {}}>{(workflow) =>
       <ChangeListener target={workflow}>{=>
-        <EditWorkflowPage {...@props} workflow={workflow} />
+        if workflow.mobile_friendly
+          <EditMobileWorkflowPage />
+        else
+          <EditWorkflowPage {...@props} workflow={workflow} />
       }</ChangeListener>
     }</PromiseRenderer>

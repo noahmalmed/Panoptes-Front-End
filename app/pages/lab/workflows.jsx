@@ -64,10 +64,20 @@ const WorkflowsPage = (props) => {
         <button
           type="button"
           data-button="createWorkflow"
-          onClick={props.showCreateWorkflow}
+          onClick={props.showCreateWorkflow.bind(this, false)}
           disabled={props.workflowCreationInProgress}
         >
           New workflow{' '}
+          <LoadingIndicator off={!props.workflowCreationInProgress} />
+        </button>
+
+        <button
+          type="button"
+          data-button="createWorkflow"
+          onClick={props.showCreateWorkflow.bind(this, true)}
+          disabled={props.workflowCreationInProgress}
+        >
+          New mobile workflow{' '}
           <LoadingIndicator off={!props.workflowCreationInProgress} />
         </button>
       </div>
@@ -75,6 +85,7 @@ const WorkflowsPage = (props) => {
       {props.workflowCreationInProgress && (
         <ModalFormDialog tag="div">
           <WorkflowCreateForm
+            mobile={props.createMobileWorkflow}
             onSubmit={props.workflowActions.createWorkflowForProject}
             onCancel={props.hideCreateWorkflow}
             onSuccess={props.handleWorkflowCreation}
@@ -119,6 +130,7 @@ WorkflowsPage.defaultProps = {
 };
 
 WorkflowsPage.propTypes = {
+  createMobileWorkflow: PropTypes.bool,
   hideCreateWorkflow: PropTypes.func,
   handleWorkflowCreation: PropTypes.func,
   handleWorkflowReorder: PropTypes.func,
