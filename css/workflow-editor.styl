@@ -105,3 +105,36 @@
 .workflow-mobile-form-right-panel
   min-width: 150px
   margin-top: 1em
+
+.tutorial-dropdown
+  position: relative
+
+  i
+    margin: 0 0.5rem
+
+  > button:first-child
+    border: 1px solid black
+    cursor: pointer
+    padding: 0.25rem
+    width: 10rem
+
+  &__menu
+    position: absolute
+    width: 10rem
+    border: 1px solid black
+
+    button
+      border: none
+      cursor: pointer
+      width: 100%
+
+      &:hover, &:focus
+        background: gray
+
+.mobile-workflow-edit
+  &__menu
+    display: flex
+    flex-direction: row
+
+    > div
+      margin-right: 1rem
