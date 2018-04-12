@@ -746,7 +746,7 @@ module.exports = createReactClass
     <PromiseRenderer promise={apiClient.type('workflows').get @props.params.workflowID, {}}>{(workflow) =>
       <ChangeListener target={workflow}>{=>
         if workflow.mobile_friendly
-          <EditMobileWorkflowPage />
+          <EditMobileWorkflowPage {...@props} workflow={workflow} />
         else
           <EditWorkflowPage {...@props} workflow={workflow} />
       }</ChangeListener>
