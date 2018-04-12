@@ -2,6 +2,7 @@ import React from 'react';
 import PropTypes from 'prop-types';
 import apiClient from 'panoptes-client/lib/api-client';
 import RetirementRulesEditor from '../../components/retirement-rules-editor';
+import MobilePreviewer from './mobile/mobile_previewer';
 
 export default class EditMobileWorkflowPage extends React.Component {
   constructor(props) {
@@ -141,6 +142,8 @@ export default class EditMobileWorkflowPage extends React.Component {
             <RetirementRulesEditor workflow={this.props.workflow} />
           </div>
         </div>
+
+        <MobilePreviewer />
       </div>
     );
   }
